@@ -33,8 +33,8 @@ Debido a que la aplicación utiliza la API fetch() para cargar el archivo JSON d
 Para ejecutarlo en local:
 
 1. Clona este repositorio.
-2. Usa un servidor local. Si usas VS Code, te recomiendo la extensión Live Server.
-3. Abre index.html a través del servidor local (ej: http://127.0.0.1:5500).
+2. Usa un servidor local. En linux `python3 -m http.server`
+3. Abre index.html a través del servidor local (ej: http://localhost:8000).
 
 ## 📊 Formato de Datos (JSON)
 Para actualizar los menús, simplemente edita el archivo menu_mira.json siguiendo este formato:
