@@ -72,7 +72,7 @@ function getMenuForDate(date) {
     return "---";
 }
 
-function render() {
+function render_bak() {
     const container = document.getElementById('app');
     const info = document.getElementById('week-info');
     if (!container || !info) return;
@@ -134,6 +134,65 @@ function render() {
     const todayCard = document.querySelector('.day-card.today');
     if (todayCard) {
         todayCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function render() {
+    const container = document.getElementById('app');
+    const info = document.getElementById('week-info');
+    if (!container || !info) return;
+
+    container.innerHTML = '';
+
+    const endOfWeek = new Date(currentMonday);
+    endOfWeek.setDate(currentMonday.getDate() + 4);
+    const options = { day: 'numeric', month: 'short' };
+    info.innerHTML = `SEMANA DEL<br>${currentMonday.toLocaleDateString('es-ES', options)} AL ${endOfWeek.toLocaleDateString('es-ES', options)}`.toUpperCase();
+
+    const todayStr = new Date().toDateString();
+
+    for (let i = 0; i < 5; i++) {
+        const date = new Date(currentMonday);
+        date.setDate(currentMonday.getDate() + i);
+        
+        // 1. Obtenemos el menú original
+        const rawMenu = getMenuForDate(date);
+        const hasMenu = rawMenu !== "---";
+
+        // 2. Preparamos el texto para mostrar (con cursiva si no hay nada)
+        const displayMenu = hasMenu ? rawMenu : "<i style='color:var(--muted)'>Sin menú registrado</i>";
+
+        // 3. Generamos el HTML del botón SOLO si hay menú
+        let shareHtml = '';
+        const dayName = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(date);
+        const dateNum = date.toLocaleDateString('es-ES');
+
+        if (hasMenu) {
+            const shareText = encodeURIComponent(`🍽️ Menú Miraflores\n ${dayName} (${dateNum})\n${rawMenu}`);
+            const whatsappUrl = `https://wa.me/?text=${shareText}`;
+            shareHtml = `
+                <a href="${whatsappUrl}" target="_blank" style="text-decoration:none; font-size: 1.1rem; line-height: 1;" title="Compartir">
+                    💬
+                </a>`;
+        }
+
+        const isToday = date.toDateString() === todayStr;
+        const card = document.createElement('div');
+        card.className = `day-card ${isToday ? 'today' : ''}`;
+        
+        card.innerHTML = `
+            <div class="day-header">
+                <span class="day-name">
+                    ${dayName} ${isToday ? '<span class="today-badge">HOY</span>' : ''}
+                </span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="day-date">${dateNum}</span>
+                    ${shareHtml}
+                </div>
+            </div>
+            <div class="menu-body">${displayMenu}</div>
+        `;
+        container.appendChild(card);
     }
 }
 
