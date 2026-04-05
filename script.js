@@ -168,14 +168,14 @@ function render() {
         const dateNum = date.toLocaleDateString('es-ES');
 
         if (hasMenu) {
-            const hr = "─".repeat(25);
+            const hr = "─".repeat(20);
             const appUrl = "https://menumiraflores.vercel.app";
 
             const shareText = encodeURIComponent(
                 `*Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
                 `${hr}\n` +
                 `${rawMenu}\n\n` +
-                `🌐 Más en: ${appUrl}`
+                `${appUrl}`
             );
 
             const whatsappUrl = `https://wa.me/?text=${shareText}`;
