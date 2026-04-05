@@ -11,12 +11,13 @@ Una aplicación web ligera, rápida y **mobile-first** diseñada para que las fa
 
 ## ✨ Características Principales
 
--   📱 **Optimización Móvil:** Diseño responsivo pensado para una consulta rápida en el día a día.
--   🗓️ **Lógica Inteligente de Fechas:** -   Detecta automáticamente la semana actual.
-    -   **Salto de Fin de Semana:** Si se abre la app un sábado o domingo, muestra automáticamente la semana siguiente.
--   📍 **Indicador de "HOY":** Resaltado visual con borde verde y etiqueta distintiva para identificar el menú del día actual al instante.
--   🔄 **Navegación Intuitiva:** Botones de navegación semanal y función de "Reset" (vuelve a la semana actual al tocar el logo del centro).
--   🚀 **Arquitectura Limpia:** Separación total de responsabilidades en archivos HTML, CSS y JS independientes.
+- 📱 **Optimización Móvil:** Diseño responsivo pensado para una consulta rápida en el día a día.
+- 🗓️ **Lógica Inteligente de Fechas:** -   Detecta automáticamente la semana actual.
+  -   **Salto de Fin de Semana:** Si se abre la app un sábado o domingo, muestra automáticamente la semana siguiente.
+- 📍 **Indicador de "HOY":** Resaltado visual con borde verde y etiqueta distintiva para identificar el menú del día actual al instante.
+- 🔄 **Navegación Intuitiva:** Botones de navegación semanal y función de "Reset" (vuelve a la semana actual al tocar el logo del centro).
+- 🚀 **Arquitectura Limpia:** Separación total de responsabilidades en archivos HTML, CSS y JS independientes.
+- 💬 **Compartir Whatsapp:** Un icono para compartir el menú de cada día a través de Whatsapp
 
 ## 🛠️ Estructura del Proyecto
 
