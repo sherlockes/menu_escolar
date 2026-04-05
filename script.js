@@ -168,12 +168,17 @@ function render() {
         const dateNum = date.toLocaleDateString('es-ES');
 
         if (hasMenu) {
-            const shareText = encodeURIComponent(`*Menú Miraflores* _(${dayName} - ${dateNum})_\n────────────────\n${rawMenu}`);
+            const hr = "─".repeat(25);
+            const appUrl = "menumiraflores.vercel.app"; // Tu URL de Vercel
+
+            const shareText = encodeURIComponent(
+                `*Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
+                `${hr}\n` +
+                `${rawMenu}\n\n` +
+                `🌐 Ver más: ${appUrl}`
+            );
+
             const whatsappUrl = `https://wa.me/?text=${shareText}`;
-            shareHtml = `
-                <a href="${whatsappUrl}" target="_blank" style="text-decoration:none; font-size: 1.1rem; line-height: 1;" title="Compartir">
-                    💬
-                </a>`;
         }
 
         const isToday = date.toDateString() === todayStr;
