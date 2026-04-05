@@ -169,13 +169,13 @@ function render() {
 
         if (hasMenu) {
             const hr = "─".repeat(25);
-            const appUrl = "menumiraflores.vercel.app";
+            const appUrl = "https://menumiraflores.vercel.app";
 
             const shareText = encodeURIComponent(
-                `*🍽️ Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
+                `*Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
                 `${hr}\n` +
                 `${rawMenu}\n\n` +
-                `🌐 Ver más: ${appUrl}`
+                `🌐 Más en: ${appUrl}`
             );
 
             const whatsappUrl = `https://wa.me/?text=${shareText}`;
