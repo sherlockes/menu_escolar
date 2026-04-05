@@ -169,16 +169,20 @@ function render() {
 
         if (hasMenu) {
             const hr = "─".repeat(25);
-            const appUrl = "menumiraflores.vercel.app"; // Tu URL de Vercel
+            const appUrl = "menumiraflores.vercel.app";
 
             const shareText = encodeURIComponent(
-                `*Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
+                `*🍽️ Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
                 `${hr}\n` +
                 `${rawMenu}\n\n` +
                 `🌐 Ver más: ${appUrl}`
             );
 
             const whatsappUrl = `https://wa.me/?text=${shareText}`;
+            shareHtml = `
+                <a href="${whatsappUrl}" target="_blank" style="text-decoration:none; font-size: 1.1rem; line-height: 1;" title="Compartir">
+                    💬
+                </a>`;
         }
 
         const isToday = date.toDateString() === todayStr;
