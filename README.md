@@ -21,10 +21,16 @@ Una aplicación web ligera, rápida y **mobile-first** diseñada para que las fa
 ## 🛠️ Estructura del Proyecto
 
 ```text
-├── index.html       # Estructura semántica de la aplicación
-├── style.css        # Diseño, variables de color y estilos responsivos
-├── script.js        # Lógica de gestión de fechas, fetch y renderizado
-└── menu_mira.json   # Base de datos local con los menús programados
+.
+├── assets/             # Recursos estáticos (imágenes, mockups)
+│   └── mobile-preview.jpg
+├── index.html          # Punto de entrada y estructura DOM
+├── style.css           # Hoja de estilos y variables de diseño
+├── script.js           # Lógica de fechas, fetch de datos y renderizado
+├── menu_mira.json      # Base de datos local de menús (JSON)
+├── ai.sh               # Script de utilidad para sincronización con IA
+├── .gitignore          # Archivos excluidos del control de versiones
+└── README.md           # Documentación del proyecto
 ```
 
 ## 🚀 Instalación y Uso Local
@@ -54,6 +60,12 @@ Este proyecto está optimizado para ser desplegado en GitHub Pages:
 - Ve a Settings > Pages.
 - En "Build and deployment", selecciona la rama main y guarda.
 - ¡Listo! Tu app estará online en segundos.
+
+## 🤖 Herramientas de Desarrollo (ai.sh)
+Para facilitar el mantenimiento y la evolución del proyecto mediante Inteligencia Artificial, se ha incluido una pequeña utilidad de automatización:
+- `ai.sh`: Es un script de shell diseñado para empaquetar automáticamente todo el código fuente y la estructura del proyecto en un único archivo de texto llamado `ai_context.txt`.
+- Uso: Al ejecutarlo, genera una "foto" actualizada del estado del código, permitiendo que un asistente de IA comprenda el contexto completo de la aplicación sin necesidad de revisar archivo por archivo.
+- Privacidad: El archivo generado (ai_context.txt) está incluido en el .gitignore para evitar subir redundancias de código al repositorio de GitHub.
 
 - ⚖️ Licencia
 Este proyecto es de código abierto y está bajo la licencia MIT.
