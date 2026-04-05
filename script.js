@@ -21,12 +21,23 @@ function resetToToday() {
 }
 
 async function loadMenu() {
-    // Usamos la ruta relativa
-    const url = 'menu_mira.json'; 
+    const url = 'menu_mira.json';
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error('Error de red');
-        menuData = await response.json();
+        const rawData = await response.json();
+        
+        // Convertimos el array en un objeto de búsqueda rápida
+        menuData = {}; 
+        rawData.forEach(item => {
+            // Extraemos la fecha y el contenido del menú
+            const fecha = item.fecha || item.date || item.dia;
+            const contenido = item.menu || item.comida || item.texto;
+            if (fecha) {
+                menuData[fecha] = contenido;
+            }
+        });
+        
         render();
     } catch (err) {
         document.getElementById('app').innerHTML = `
@@ -39,21 +50,25 @@ async function loadMenu() {
 
 function getMenuForDate(date) {
     if (!menuData) return "---";
+    
     const pad = (n) => n.toString().padStart(2, '0');
     const d = date.getDate();
     const m = date.getMonth() + 1;
     const y = date.getFullYear();
+
+    // Generamos los formatos posibles de fecha
     const candidates = [
-        `${y}-${pad(m)}-${pad(d)}`, 
-        `${pad(d)}/${pad(m)}/${y}`, 
-        `${pad(d)}-${pad(m)}-${y}`, 
-        `${d}/${m}/${y}`
+        `${y}-${pad(m)}-${pad(d)}`, // 2026-04-05
+        `${pad(d)}/${pad(m)}/${y}`, // 05/04/2026
+        `${pad(d)}-${pad(m)}-${y}`, // 05-04-2026
+        `${d}/${m}/${y}`            // 5/4/2026
     ];
 
-    if (Array.isArray(menuData)) {
-        const found = menuData.find(item => candidates.includes(item.fecha || item.date || item.dia));
-        return found ? (found.menu || found.comida || found.texto) : "---";
+    // Buscamos directamente en el objeto (mucho más rápido)
+    for (let c of candidates) {
+        if (menuData[c]) return menuData[c];
     }
+    
     return "---";
 }
 
@@ -95,6 +110,30 @@ function render() {
             <div class="menu-body">${menuText}</div>
         `;
         container.appendChild(card);
+
+        const shareText = encodeURIComponent(`*Menú ${dayName} (${dateNum})*\n${menuText}\n\n📍 CEIP Miraflores`);
+        const whatsappUrl = `https://wa.me/?text=${shareText}`;
+
+        card.innerHTML = `
+            <div class="day-header">
+                <span class="day-name">
+                    ${dayName} ${isToday ? '<span class="today-badge">HOY</span>' : ''}
+                </span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="day-date">${dateNum}</span>
+                    <a href="${whatsappUrl}" target="_blank" style="text-decoration:none; font-size: 1.1rem; line-height: 1;" title="Compartir">
+                        💬
+                    </a>
+                </div>
+            </div>
+            <div class="menu-body">${menuText}</div>
+        `;
+
+    }
+    
+    const todayCard = document.querySelector('.day-card.today');
+    if (todayCard) {
+        todayCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
 

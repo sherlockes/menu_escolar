@@ -130,3 +130,19 @@ button:active { transform: scale(0.92); opacity: 0.9; }
 
 .loading { margin-top: 40px; color: var(--muted); font-weight: 500; }
 .error { color: #e74c3c; padding: 30px; text-align: center; font-weight: bold; }
+
+.day-header a {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.day-header a:hover {
+    opacity: 1;
+}
+
+@media print {
+    header, .nav-bar, button { display: none !important; }
+    body { background: white; }
+    .menu-list { width: 100%; max-width: none; }
+    .day-card { border: 1px solid #ccc; break-inside: avoid; }
+}
