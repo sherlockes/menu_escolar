@@ -5,6 +5,10 @@ Una aplicación web ligera, rápida y **mobile-first** diseñada para que las fa
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+<p align="center">
+  <img src="./assets/mobile-preview.jpg" alt="Menú Escolar App" width="300">
+</p>
+
 ## ✨ Características Principales
 
 -   📱 **Optimización Móvil:** Diseño responsivo pensado para una consulta rápida en el día a día.
