@@ -140,6 +140,45 @@ button:active { transform: scale(0.92); opacity: 0.9; }
     opacity: 1;
 }
 
+.share-icon {
+    width: 20px;       /* Ajusta el tamaño a tu gusto */
+    height: 20px;
+    display: block;    /* Evita espacios extra debajo de la imagen */
+    transition: transform 0.2s ease;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.share-btn:hover .share-icon {
+    transform: scale(1.1); /* Un pequeño efecto visual al pasar el ratón */
+    opacity: 1;
+}
+
+.share-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.share-btn:hover {
+    opacity: 1;
+}
+
+.share-icon {
+    width: 20px;
+    height: 20px;
+}
+
 @media print {
     header, .nav-bar, button { display: none !important; }
     body { background: white; }

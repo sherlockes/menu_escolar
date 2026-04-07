@@ -168,21 +168,13 @@ function render() {
         const dateNum = date.toLocaleDateString('es-ES');
 
         if (hasMenu) {
-            const hr = "─".repeat(20);
-            const appUrl = "https://menumiraflores.vercel.app";
-
-            const shareText = encodeURIComponent(
-                `*Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
-                `${hr}\n` +
-                `${rawMenu}\n\n` +
-                `${appUrl}`
-            );
-
-            const whatsappUrl = `https://wa.me/?text=${shareText}`;
+            // Escapamos comillas simples por si el menú tiene alguna (ej: "L'Arroz")
+            const safeMenu = rawMenu.replace(/'/g, "\\'");
+            
             shareHtml = `
-                <a href="${whatsappUrl}" target="_blank" style="text-decoration:none; font-size: 1.1rem; line-height: 1;" title="Compartir">
-                    💬
-                </a>`;
+                <button onclick="shareMenu('${dayName}', '${dateNum}', '${safeMenu}')" class="share-btn" title="Compartir">
+                    <img src="assets/whatsapp-logo.svg" alt="Compartir" class="share-icon">
+                </button>`;
         }
 
         const isToday = date.toDateString() === todayStr;
@@ -208,6 +200,33 @@ function render() {
 function changeWeek(days) {
     currentMonday.setDate(currentMonday.getDate() + days);
     render();
+}
+
+async function shareMenu(dayName, dateNum, menuText) {
+    const hr = "─".repeat(20);
+    const appUrl = "https://menumiraflores.vercel.app";
+
+    // Construimos exactamente tu mensaje
+    const fullText = `*Menú Miraflores* _(${dayName} - ${dateNum})_\n` +
+                     `${hr}\n` +
+                     `${menuText}\n\n` +
+                     `${appUrl}`;
+
+    // Intentamos usar el menú nativo del móvil
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Menú Miraflores',
+                text: fullText
+            });
+        } catch (err) {
+            console.log('Compartir cancelado o fallido', err);
+        }
+    } else {
+        // Si el navegador no soporta compartir (ej: PC), abrimos WhatsApp
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullText)}`;
+        window.open(whatsappUrl, '_blank');
+    }
 }
 
 // Arrancar la aplicación
