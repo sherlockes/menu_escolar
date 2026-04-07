@@ -231,3 +231,12 @@ async function shareMenu(dayName, dateNum, menuText) {
 
 // Arrancar la aplicación
 loadMenu();
+
+// Registro del Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registrado', reg))
+            .catch(err => console.log('Error al registrar SW', err));
+    });
+}
