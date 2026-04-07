@@ -173,7 +173,7 @@ function render() {
             
             shareHtml = `
                 <button onclick="shareMenu('${dayName}', '${dateNum}', '${safeMenu}')" class="share-btn" title="Compartir">
-                    <img src="assets/whatsapp-logo.svg" alt="Compartir" class="share-icon">
+                    <img src="assets/share.svg" alt="Compartir" class="share-icon">
                 </button>`;
         }
 
@@ -224,7 +224,7 @@ async function shareMenu(dayName, dateNum, menuText) {
         }
     } else {
         // Si el navegador no soporta compartir (ej: PC), abrimos WhatsApp
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullText)}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullText)}`;
         window.open(whatsappUrl, '_blank');
     }
 }
